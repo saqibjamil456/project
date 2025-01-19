@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Home</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}">
+</head>
+<body>
+    <div class="sliding-background">
+        <header>
+            <div class="header-container">
+                <div class="logo-container">
+                    <img src="{{ url_for('static', filename='logo.png') }}" alt="website logo" class="logo">
+                </div>
+                <h2 class="name">Transport Route Finder</h2>
+                <nav>
+                    <a href="{{ url_for('home') }}"><button class="button" style="background-color: #26750a; border-radius: 8px; color: black;"><b>Home</b></button></a>
+                    <a href="{{ url_for('search') }}"><button class="button"><b>Search</b></button></a>
+                    <a href="{{ url_for('aboutus') }}"><button class="button"><b>About Us</b></button></a>
+                </nav>
+            </div>
+        </header>
+        <section id="body-content">
+            <div class="body-content">
+                <h1 class="slogan">Guiding You to Your Destination With Easy and Accurate Bus Navigation </h1>
+                <br>
+                <section id="start" class="start">
+                    <div class="getstarted">
+                        <a href="{{ url_for('search') }}" class="link" style="font-family: 'Kristy';"><h2>Get Started</h2></a>
+                    </div>
+                </section>
+            </div>    
+        </section>
+        <br>
+        <footer style="margin-top: 10px;">
+            <p>Email: routefinder@gmail.com</p>
+            <p>2024@copyright</p>
+            <p>Contact: 0300-2081994</p>
+        </footer>
+    </div>
+
+</body>
+</html>

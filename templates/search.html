@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Search</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}">
+</head>
+<body class="search">
+  <header>
+    <div class="header-container">
+        <!-- Logo -->
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="website logo" class="logo">
+        </div>
+        <!-- Website Name -->
+        <h2 class="name">Transport Route Finder</h2>
+        <!-- Navigation -->
+        <nav>
+            <a href="{{ url_for('home') }}"><button class="button"><b>Home</b></button></a>
+            <a href="{{ url_for('search') }}"><button class="button" style="background-color: #26750a; border-radius: 8px; color: black;"><b>Search</b></button></a>
+            <a href="{{ url_for('aboutus') }}"><button class="button"><b>About Us</b></button></a>
+        </nav>
+    </div>
+</header>
+    <h3 class="note"><a style="color: red;">Note:</a> We currently operate in selected areas. To learn more, visit our <a href="{{ url_for('aboutus') }}" style="color: rgb(0, 0, 0);">About Us</a> page <br> All of the buses operate between 7am - 10pm</h3>
+    <section id="xyz">
+    <div class="xyz">
+      <section class="search-content">
+        <div class="dropdown-container">
+          <form method="post">
+            <select name="start" class="dropdown" required>
+              <option value="">Current Location</option>
+              {% for stop in stops %}
+              <option value="{{ stop }}">{{ stop }}</option>
+              {% endfor %}
+            </select>
+      
+            <select name="destination" class="dropdown" required>
+              <option value="">Destination</option>
+              {% for stop in stops %}
+              <option value="{{ stop }}">{{ stop }}</option>
+              {% endfor %}
+            </select>
+            <button type="submit" class="start-search">🔍 Search</h2></button>
+            </form>
+            
+          </div>
+        </section>
+        
+        <section id="output-box">  
+          <div class="output-box">
+            {% if msg %}
+                <p style="padding: 20px;">{{ msg }}</p>
+            {% endif %}
+            
+            {% if routes %}
+
+            <div style="padding: 20px;">
+              <h2>Route Recommendations</h2>
+              {% if message %}
+                  <p>{{ message }}</p>
+              {% endif %}
+              <br>
+              <h3>Direct Routes:</h3>
+              {% if routes.direct_routes %}
+              <ul>
+                  {% for route in routes.direct_routes %}
+                  <p>Bus Route: {{ route[0] }}, Total Stops: {{ route[1] }}</p>
+                  {% endfor %}
+              </ul>
+              {% else %}
+              <p>No direct routes found.</p>
+              {% endif %}
+              <br>
+              <h3>Routes Through Areas:</h3>
+              {% if routes.area_routes %}
+              <ul>
+                  {% for route in routes.area_routes %}
+                  <p>Bus Route: {{ route[0] }}</p>
+                  {% endfor %}
+              </ul>
+              {% else %}
+              <p>No area-based routes found.</p>
+              {% endif %}
+              <br>
+              <h3>Routes with Connections:</h3>
+              {% if routes.connection_routes %}
+              <ul>
+                  {% for connection in routes.connection_routes %}
+                  <p>Transfer at: {{ connection[0] }}, First Route: {{ connection[1] }}, Second Route: {{ connection[2] }}</p>
+                  {% endfor %}
+              </ul>
+              {% else %}
+              <p>No routes with connections found.</p>
+              {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+    <!-- <section style="color: rgba(255, 255, 255, 0);">abc</section> -->
+     <br>
+    <footer>
+      <p>Email: routefinder@gmail.com</p>
+      <p>2024@copyright</p>
+      <p>Contact: 0300-2081994</p>
+    </footer>
+</body>
+</html>
